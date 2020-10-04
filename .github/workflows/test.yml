@@ -17,4 +17,8 @@ jobs:
       - uses: actions/checkout@v2
       - uses: ./
       - shell: bash -l {0}
-        run: bvm -v
+        run: |
+          bvm -v
+          bvm registry add https://bvm.land/deno/registry.json
+          bvm install deno
+      - run: deno -V
