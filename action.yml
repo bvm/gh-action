@@ -1,0 +1,12 @@
+name: 'bvm'
+description: 'Downloads, installs, and sets up bvm for your project.'
+author: 'David Sherret'
+runs:
+  using: 'composite'
+  steps:
+    # this uses global shell
+    - shell: bash
+      run: |
+        . $GITHUB_ACTION_PATH/action.sh
+        echo "BVM_INSTALL_DIR=$BVM_INSTALL_DIR" >> $GITHUB_ENV
+        echo ". \$HOME/.bvm/bin/bvm-init" >> "$HOME/.bash_profile"
