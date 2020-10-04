@@ -7,17 +7,29 @@ on:
       - 'releases/*'
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
   test:
-    runs-on: ubuntu-latest
+    name: test ${{ matrix.config.os }}
+    runs-on: ${{ matrix.config.os }}
+    strategy:
+      matrix:
+        config:
+          - os: macOS-latest
+          - os: windows-2019
+          - os: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - uses: ./
       - shell: bash -l {0}
+        if: matrix.config.os != 'windows-2019'
         run: |
+          . $BVM_INSTALL_DIR/bin/bvm-init
+          bvm -v
+          bvm registry add https://bvm.land/deno/registry.json
+          bvm install deno
+      - if: matrix.config.os == 'windows-2019'
+        run: |
+          echo $env:Path
+          ls C:\\Users\\runneradmin\\.bvm\\bin
           bvm -v
           bvm registry add https://bvm.land/deno/registry.json
           bvm install deno
