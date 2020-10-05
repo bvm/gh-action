@@ -12,14 +12,31 @@ esac
 # Install if necessary
 if [ ! -f $BVM_INSTALL_DIR/bin/bvm-bin ]
 then
-  curl -fsSL https://bvm.land/install.sh --output install.sh
-  . install.sh
+  curl -fsSL https://bvm.land/install.sh | sh
+fi
+
+# Setup for bvm install
+if [ "$is_windows" == "1" ]
+then
+  PATH="$BVM_INSTALL_DIR/bin:$PATH"
+  export PATH
+else
+  . "$BVM_INSTALL_DIR/bin/bvm-init"
 fi
 
 # Find all .bvmrc.json files and install
+chmod +x bvm-install.ps1
 find -L . -name ".bvmrc.json" | while read line ; do
-  cd $(dirname $line)
-  bvm install
+  if [ "$is_windows" == "1" ]
+  then
+    # launch bvm install from powershell because bash can't understand the bvm.cmd file
+    ./bvm-install.ps1 $(dirname $line)
+  else
+    (
+        cd $(dirname $line)
+        bvm install
+    )
+  fi
 done
 
 if [ "$is_windows" == "1" ]

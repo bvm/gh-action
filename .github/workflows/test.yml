@@ -18,9 +18,13 @@ jobs:
           - os: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - shell: bash
+        run: |
+          mkdir test-project
+          echo "{ \"binaries\": [\"https://bvm.land/dprint/0.9.1.json\"] }" > test-project/.bvmrc.json
       - uses: ./
-      - shell: bash -l {0}
-        if: matrix.config.os != 'windows-2019'
+      - run: dprint -v
+      - if: matrix.config.os != 'windows-2019'
         run: |
           . $BVM_INSTALL_DIR/bin/bvm-init
           bvm -v
