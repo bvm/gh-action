@@ -12,8 +12,8 @@ esac
 # Install if necessary
 if [ ! -f $BVM_INSTALL_DIR/bin/bvm-bin ]
 then
-  . test_install.sh
-  #curl -fsSL https://bvm.land/install.sh | sh
+  curl -fsSL https://bvm.land/install.sh --output install.sh
+  . install.sh
 fi
 
 # Find all .bvmrc.json files and install
