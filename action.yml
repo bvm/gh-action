@@ -1,5 +1,5 @@
 name: 'bvm'
-description: 'Downloads, installs, and sets up bvm for your project.'
+description: 'Downloads, installs dependencies, and sets up bvm for your project.'
 author: 'David Sherret'
 runs:
   using: 'composite'

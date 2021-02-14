@@ -24,13 +24,18 @@ else
   . "$BVM_INSTALL_DIR/bin/bvm-init"
 fi
 
+# Mark the powershell script as executable
+if [ "$is_windows" == "1" ]
+then
+  chmod +x $GITHUB_ACTION_PATH/bvm-install.ps1
+fi
+
 # Find all .bvmrc.json files and install
-chmod +x bvm-install.ps1
 find -L . -name ".bvmrc.json" | while read line ; do
   if [ "$is_windows" == "1" ]
   then
     # launch bvm install from powershell because bash can't understand the bvm.cmd file
-    ./bvm-install.ps1 $(dirname $line)
+    $GITHUB_ACTION_PATH/bvm-install.ps1 $(dirname $line)
   else
     (
         cd $(dirname $line)
