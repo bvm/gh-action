@@ -7,7 +7,7 @@
 
 ```
 # do this after checking out the repository
-- uses: bvm/gh-action@v1.0.0
+- uses: bvm/gh-action@v1.0.1
 ```
 
 ### Mac and Linux - Execute `bvm`
