@@ -1,13 +1,13 @@
 # GitHub Action for bvm
 
 1. Downloads and installs [bvm](https://github.com/bvm/bvm).
-2. Automatically installs any binaries specified in `.bvmrc.json` files.
+2. Automatically installs any binaries specified in `bvm.json` files.
 
 ## Usage
 
 ```
 # do this after checking out the repository
-- uses: bvm/gh-action@v1.0.1
+- uses: bvm/gh-action@v1.1.0
 ```
 
 ### Mac and Linux - Execute `bvm`

@@ -30,8 +30,8 @@ then
   chmod +x $GITHUB_ACTION_PATH/bvm-install.ps1
 fi
 
-# Find all .bvmrc.json files and install
-find -L . -name ".bvmrc.json" | while read line ; do
+# Find all bvm.json files and install
+find -L . -name "bvm.json" | while read line ; do
   if [ "$is_windows" == "1" ]
   then
     # launch bvm install from powershell because bash can't understand the bvm.cmd file
